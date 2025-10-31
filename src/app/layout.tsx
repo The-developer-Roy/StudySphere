@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "./Providers";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -27,13 +28,15 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <header className="bg-primary text-black p-4 text-center font-semibold shadow-md">
-                    StudySphere
-                </header>
-                <main className="flex-1 container mx-auto p-6">{children}</main>
-                <footer className="text-center text-sm text-gray-500 p-4">
-                    © {new Date().getFullYear()} StudySphere
-                </footer>
+                <Providers>
+                    <header className="bg-primary text-black p-4 text-center font-semibold shadow-md">
+                        StudySphere
+                    </header>
+                    <main className="flex-1 container mx-auto p-6">{children}</main>
+                    <footer className="text-center text-sm text-gray-500 p-4">``
+                        © {new Date().getFullYear()} StudySphere
+                    </footer>
+                </Providers>
             </body>
         </html>
     );
