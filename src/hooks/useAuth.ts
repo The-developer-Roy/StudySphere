@@ -1,10 +1,10 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export function useAuth(redirectTo = "/auth/signin") {
+export function useAuth(redirectTo = "/login") {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -14,5 +14,10 @@ export function useAuth(redirectTo = "/auth/signin") {
     }
   }, [status, router, redirectTo]);
 
-  return { session, status };
+  // ✅ Logout function (redirects to /auth/signin after session clear)
+  const logout = () => {
+    signOut({ callbackUrl: "/login" });
+  };
+
+  return { session, status, logout };
 }
